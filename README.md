@@ -1,4 +1,4 @@
-# AsmaKaya.github.io.
+# AsmaKaya.github.io
 
 - Name: ASMA SOUSSI
 
