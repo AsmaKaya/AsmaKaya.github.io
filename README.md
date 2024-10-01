@@ -35,7 +35,7 @@ _The websites that I find interesting are_:
       
        * [Youtube](www.youtube.com): I find Youtube as an interesting website as it is the second viewing website after [Google](www.Google.com). The online video-sharing platform has a wide variety of content depending of every user interests. 
 
-### *Places to visit*
+## *Places to visit*
 
 I would love to visit so many places in the world and discover different cultures as I love travelling and exploring, The places that I want to visit are:
 
