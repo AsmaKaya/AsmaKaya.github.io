@@ -33,9 +33,4 @@ erDiagram
     PRODUCT ||--|| INVENTORY : "has"
 
 
-#Description of the diagram:
 
-A Customer can make multiple Sales
-A Product can be part of multiple Sales
-A Product has one corresponding Inventory 
-This ERD serves as an efficient model for the shoe store's database structure, facilitating management of customers, sales transactions, and inventory levels.
