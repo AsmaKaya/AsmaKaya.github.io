@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <style>
+        /* Styling to ensure labels and inputs appear on separate lines */
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- This is a form where users can type a number into an input box -->
+    <form id="inputForm">
+        <!-- Input field with a label for the user -->
+        <label for="operandOne">x:</label>
+        <input name="operandOne" id="operandOne" value="10">
+        
+        <!-- A label and a div to display the result -->
+        <label for="total">Result:</label>
+        <div name="total" id="total"></div>
+    </form>
+
+    <py-script>
+        # Import required tools to work with the HTML document
+        from pyodide.ffi import create_proxy  # Allows us to connect Python functions to JavaScript events
+        from js import document  # Gives us access to the webpage's elements (like input boxes and divs)
+
+        # Function to update the "Result" section whenever the user types in the input box
+        def update_result(event):
+            # Get the input box element by its ID (operandOne)
+            input_box = document.getElementById("operandOne")
+            
+            # Get the result box element by its ID (total) where we'll show the output
+            result_box = document.getElementById("total")
+            
+            try:
+                # Try to convert the input value to a number (float)
+                operand_one = float(input_box.value)
+                
+                # If it's valid, update the result box with a message showing the number
+                result_box.innerHTML = f"Hello! The input says: {operand_one}"
+            except ValueError:
+                # If the input is not a valid number, show an error message instead
+                result_box.innerHTML = "Please enter a valid number."
+
+        # Function to stop the form from refreshing the page when Enter is pressed
+        def prevent_form_submission(event):
+            # Prevent the default behavior (form submission and page refresh)
+            event.preventDefault()
+
+        # Attach the update_result function to the input box
+        # This makes the update_result function run whenever the user types in the box
+        input_box = document.getElementById("operandOne")
+        proxy_update_result = create_proxy(update_result)  # Wrap the Python function for JavaScript compatibility
+        input_box.addEventListener("input", proxy_update_result)  # Listen for the "input" event
+
+        # Attach the prevent_form_submission function to the form
+        # This makes sure pressing Enter does not refresh the page
+        form = document.getElementById("inputForm")
+        proxy_prevent_form = create_proxy(prevent_form_submission)  # Wrap the Python function for JavaScript compatibility
+        form.addEventListener("submit", proxy_prevent_form)  # Listen for the "submit" event
+    </py-script>
+</body>
+</html>
